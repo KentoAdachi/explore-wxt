@@ -1,8 +1,9 @@
 import OpenAI from "openai";
 
-export const buttonHandler = async (apiKey: string) => {
+export const buttonHandler = async (apiKey: string, baseURL: string) => {
   const openai = new OpenAI({
     apiKey: apiKey,
+    baseURL: baseURL,
     dangerouslyAllowBrowser: true,
   });
   const completion = await openai.chat.completions.create({

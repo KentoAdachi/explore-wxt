@@ -9,6 +9,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState("");
   const [apiKey, setApiKey] = useState("");
+  const [baseURL, setBaseURL] = useState("");
 
   useEffect(() => {
     storage.getItem("local:key").then((storedApiKey) => {
@@ -16,16 +17,26 @@ function App() {
         setApiKey(storedApiKey as string);
       }
     });
+    storage.getItem("local:baseURL").then((storedBaseURL) => {
+      if (storedBaseURL) {
+        setBaseURL(storedBaseURL as string);
+      }
+    });
   }, []);
 
   const handleMessageClick = async () => {
-    const msg = await buttonHandler(apiKey);
+    const msg = await buttonHandler(apiKey, baseURL);
     setMessage(msg ?? "no message");
   };
 
   const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setApiKey(e.target.value);
     storage.setItem("local:key", e.target.value);
+  };
+
+  const handleBaseURLChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBaseURL(e.target.value);
+    storage.setItem("local:baseURL", e.target.value);
   };
 
   return (
@@ -45,6 +56,12 @@ function App() {
           placeholder="Enter API Key"
           value={apiKey}
           onChange={handleApiKeyChange}
+        />
+        <input
+          type="text"
+          placeholder="https://api.openai.com/v1"
+          value={baseURL}
+          onChange={handleBaseURLChange}
         />
         <button onClick={() => setCount((count) => count + 3)}>
           count is {count}
