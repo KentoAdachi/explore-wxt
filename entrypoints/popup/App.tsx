@@ -52,7 +52,7 @@ function App() {
       <h1>WXT + React</h1>
       <div className="card">
         <input
-          type="text"
+          type="password"
           placeholder="Enter API Key"
           value={apiKey}
           onChange={handleApiKeyChange}
