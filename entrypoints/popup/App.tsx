@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import reactLogo from "@/assets/react.svg";
 import wxtLogo from "/wxt.svg";
 import "./App.css";
-import { buttonHandler } from "./Talk";
+import { fetchChat } from "./Chat";
 import { storage } from "wxt/storage";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   const handleMessageClick = async () => {
-    const msg = await buttonHandler(apiKey, baseURL);
+    const msg = await fetchChat(apiKey, baseURL);
     setMessage(msg ?? "no message");
   };
 
@@ -63,10 +63,6 @@ function App() {
           value={baseURL}
           onChange={handleBaseURLChange}
         />
-        <button onClick={() => setCount((count) => count + 3)}>
-          count is {count}
-        </button>
-
         <button onClick={handleMessageClick}>Message: {message}</button>
 
         <p>

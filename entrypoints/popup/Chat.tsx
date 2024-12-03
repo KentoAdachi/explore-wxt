@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-export const buttonHandler = async (apiKey: string, baseURL: string) => {
+export const fetchChat = async (apiKey: string, baseURL: string) => {
   const openai = new OpenAI({
     apiKey: apiKey,
     baseURL: baseURL,
